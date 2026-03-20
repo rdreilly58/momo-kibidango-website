@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-peach {
+    background: linear-gradient(to bottom right, #FFB074, #FF6B1A);
+  }
+
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #FF6B1A, #486581);
+  }
+
+  .button-primary {
+    padding: 0.75rem 1.5rem;
+    background-color: #FF6B1A;
+    color: white;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+  }
+
+  .button-primary:hover {
+    background-color: #F04E00;
+  }
+
+  .button-primary:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #FF8A3D;
+  }
+
+  .button-secondary {
+    padding: 0.75rem 1.5rem;
+    background-color: #D9E2EC;
+    color: #334E68;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+  }
+
+  .button-secondary:hover {
+    background-color: #BCCCDC;
+  }
+
+  .button-secondary:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #829AB1;
+  }
+
+  .button-ghost {
+    padding: 0.75rem 1.5rem;
+    color: #486581;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+  }
+
+  .button-ghost:hover {
+    background-color: #F0F4F8;
+  }
+
+  .button-ghost:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #829AB1;
+  }
+
+  .card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f4f6;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .card {
+      background-color: rgb(17 24 39);
+      border-color: rgb(31 41 55);
+    }
+  }
+}

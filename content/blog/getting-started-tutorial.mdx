@@ -1,0 +1,439 @@
+---
+title: "Getting Started with momo-kibidango: A 5-Minute Setup Guide"
+date: "2026-03-23"
+author: "Robert Reilly"
+tags: ["tutorial", "quickstart", "installation", "LLM", "guide"]
+excerpt: "You can have 2x faster inference in 5 minutes. Here's how to set up momo-kibidango step by step."
+---
+
+Want to make your LLM inference 2x faster? It's easier than you think. This guide walks you through setting up momo-kibidango in under 5 minutes.
+
+## Prerequisites: What You Need
+
+Before we start, make sure you have:
+
+- **Mac with Apple Silicon** (M1/M2/M3/M4)
+- **macOS 13.0+** (Ventura or newer)
+- **Python 3.9+** (check with `python3 --version`)
+- **16GB RAM** recommended (works with 8GB in reduced mode)
+- **50GB free disk space** for models
+- **Internet connection** for model downloads
+
+Not sure about your system? Run this check:
+
+```bash
+# System check script
+curl -fsSL https://raw.githubusercontent.com/rdreilly58/momo-kibidango/main/check_system.sh | bash
+```
+
+## Installation: Three Simple Commands
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/rdreilly58/momo-kibidango.git
+cd momo-kibidango
+```
+
+### Step 2: Set Up Python Environment
+
+```bash
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Step 3: Download Models
+
+```bash
+# Automated download (uses Hugging Face)
+python setup.py --download-models
+
+# This downloads:
+# - Draft model (1B params, ~2GB)
+# - Qualifier model (3B params, ~6GB)  
+# - Target model (7B params, ~14GB)
+# Total: ~22GB download, ~25GB on disk
+```
+
+**Expected output:**
+```
+Downloading draft model... ✓ (2.1GB)
+Downloading qualifier model... ✓ (6.3GB)
+Downloading target model... ✓ (14.2GB)
+Optimizing for Apple Silicon... ✓
+Models ready! Total time: 4m 32s
+```
+
+## Your First Inference: Hello, Speed!
+
+Let's test that everything works:
+
+```python
+# test_inference.py
+from momo_kibidango import MomoInference
+
+# Initialize with defaults
+momo = MomoInference()
+
+# Simple test
+prompt = "Explain what momo-kibidango does in one sentence."
+response = momo.generate(prompt, max_tokens=50)
+
+print(f"Response: {response}")
+print(f"Speed: {momo.last_stats['tokens_per_second']:.1f} tokens/sec")
+```
+
+Run it:
+```bash
+python test_inference.py
+```
+
+**Expected output:**
+```
+Response: Momo-kibidango accelerates LLM inference on Apple Silicon using pyramid speculative decoding, achieving 2x speedup without quality loss.
+Speed: 24.6 tokens/sec
+```
+
+Success! You're running at 2x speed.
+
+## Basic Usage Examples
+
+### Example 1: Simple Q&A
+
+```python
+from momo_kibidango import MomoInference
+
+momo = MomoInference()
+
+# Quick questions get the best speedup
+questions = [
+    "What's the capital of Japan?",
+    "How do you say 'hello' in Spanish?",
+    "What's 15% of 200?"
+]
+
+for q in questions:
+    response = momo.generate(q, max_tokens=50)
+    print(f"Q: {q}")
+    print(f"A: {response}\n")
+```
+
+### Example 2: Code Generation
+
+```python
+# Code generation with syntax highlighting
+prompt = """Write a Python function that finds the nth Fibonacci number.
+Include docstring and type hints."""
+
+response = momo.generate(
+    prompt, 
+    max_tokens=200,
+    temperature=0.3  # Lower temp for code
+)
+
+print("Generated code:")
+print(response)
+```
+
+### Example 3: Creative Writing
+
+```python
+# Creative tasks with higher temperature
+prompt = "Write a haiku about machine learning"
+
+response = momo.generate(
+    prompt,
+    max_tokens=50,
+    temperature=0.9,  # Higher for creativity
+    top_p=0.95
+)
+
+print(response)
+```
+
+### Example 4: Batch Processing
+
+```python
+# Process multiple prompts efficiently
+prompts = [
+    "Summarize the benefits of exercise",
+    "List 5 Python best practices",
+    "Explain quantum computing simply"
+]
+
+responses = momo.generate_batch(
+    prompts,
+    max_tokens=150,
+    batch_size=8  # Optimal for memory
+)
+
+for prompt, response in zip(prompts, responses):
+    print(f"Prompt: {prompt}")
+    print(f"Response: {response}\n")
+```
+
+## OpenClaw Integration
+
+If you're using OpenClaw, integration is even simpler:
+
+### Automatic Installation
+
+```bash
+# Install via ClawHub
+clawhub install momo-kibidango
+
+# Verify installation
+openclaw skills list | grep momo-kibidango
+```
+
+### Configuration
+
+Edit your OpenClaw config:
+
+```yaml
+# ~/.openclaw/config.yaml
+inference:
+  provider: momo-kibidango
+  settings:
+    enable_pyramid: true
+    max_memory_gb: 12
+    fallback_on_error: true
+```
+
+Now all LLM calls through OpenClaw automatically use momo-kibidango!
+
+### Testing OpenClaw Integration
+
+```bash
+# Test inference speed
+openclaw run "Write a short poem about coding"
+
+# Check performance stats
+openclaw inference stats
+```
+
+## Configuration Options
+
+### Basic Configuration
+
+```python
+from momo_kibidango import MomoInference, Config
+
+config = Config(
+    # Model selection
+    target_model="mistralai/Mistral-7B-Instruct-v0.2",
+    draft_model="deepseek-ai/deepseek-coder-1b-base",
+    qualifier_model="microsoft/phi-2",
+    
+    # Performance tuning
+    enable_pyramid=True,      # 3-model mode (default)
+    max_draft_tokens=8,       # Tokens to speculate
+    acceptance_threshold=0.1,  # Stricter = better quality
+    
+    # Memory management
+    max_memory_gb=12,         # Memory limit
+    enable_quantization=True,  # 4-bit for draft model
+    share_embeddings=True,     # Share across models
+    
+    # Fallback behavior
+    fallback_on_error=True,   # Graceful degradation
+    min_speedup_threshold=1.5  # Disable if slower
+)
+
+momo = MomoInference(config)
+```
+
+### Advanced Tuning
+
+```python
+# For specific use cases
+config = Config(
+    # Code-optimized settings
+    temperature_offset=-0.2,   # More deterministic
+    repetition_penalty=1.1,    # Avoid loops
+    
+    # Memory-constrained (8GB Macs)
+    enable_pyramid=False,      # 2-model only
+    aggressive_quantization=True,
+    
+    # Quality-first mode
+    acceptance_threshold=0.05,  # Very strict
+    verify_all_tokens=True,     # No shortcuts
+)
+```
+
+## Troubleshooting Common Issues
+
+### Issue 1: "Out of Memory" Error
+
+**Symptom:** Process killed or memory warnings
+
+**Solutions:**
+```bash
+# Reduce memory usage
+python setup.py --quantize-models --max-memory 8
+
+# Or use 2-model mode
+export MOMO_ENABLE_PYRAMID=false
+```
+
+### Issue 2: Slow First Inference
+
+**Symptom:** First generation takes 2-3 minutes
+
+**Solution:** Models loading. Subsequent runs will be fast. Pre-warm:
+```python
+# Warm up models
+momo = MomoInference()
+momo.warmup()  # Loads all models
+```
+
+### Issue 3: Quality Degradation
+
+**Symptom:** Outputs seem lower quality
+
+**Solution:** Tighten acceptance threshold:
+```python
+config = Config(acceptance_threshold=0.05)  # Stricter
+```
+
+### Issue 4: Import Errors
+
+**Symptom:** `ModuleNotFoundError`
+
+**Solution:**
+```bash
+# Ensure virtual environment is active
+source venv/bin/activate
+
+# Reinstall dependencies
+pip install -r requirements.txt --force-reinstall
+```
+
+### Issue 5: Model Download Fails
+
+**Symptom:** Connection timeouts or auth errors
+
+**Solution:**
+```bash
+# Manual download with resume
+python setup.py --download-models --resume
+
+# Or use Hugging Face CLI
+huggingface-cli login  # If private models
+```
+
+## Performance Monitoring
+
+Track your speedup in real-time:
+
+```python
+from momo_kibidango import MomoInference
+
+momo = MomoInference(enable_stats=True)
+
+# After generation
+stats = momo.last_stats
+print(f"Tokens generated: {stats['tokens_generated']}")
+print(f"Time taken: {stats['total_time']:.2f}s")
+print(f"Tokens/sec: {stats['tokens_per_second']:.1f}")
+print(f"Speedup: {stats['speedup']:.2f}x")
+print(f"Acceptance rate: {stats['acceptance_rate']:.1%}")
+print(f"Memory used: {stats['peak_memory_gb']:.1f}GB")
+```
+
+### Detailed Logging
+
+```python
+# Enable verbose logging
+import logging
+logging.basicConfig(level=logging.INFO)
+
+# Or use debug mode
+momo = MomoInference(debug=True)
+```
+
+## Feature Flags
+
+Control behavior with environment variables:
+
+```bash
+# Disable pyramid (use 2-model only)
+export MOMO_ENABLE_PYRAMID=false
+
+# Force CPU-only mode (debugging)
+export MOMO_DEVICE=cpu
+
+# Custom model paths
+export MOMO_MODEL_PATH=/path/to/models
+
+# Disable telemetry
+export MOMO_TELEMETRY=false
+```
+
+## Next Steps
+
+### 1. Read the Documentation
+Full docs at [momo-kibidango.dev/docs](https://momo-kibidango.dev/docs)
+
+### 2. Run Benchmarks
+```bash
+# Compare your performance
+python benchmark.py --compare-baseline
+
+# Test on your workload  
+python benchmark.py --custom-prompts your_prompts.txt
+```
+
+### 3. Join the Community
+- **Discord:** [discord.gg/momo-kibidango](https://discord.gg/momo-kibidango)
+- **GitHub Discussions:** Share configs, ask questions
+- **Twitter:** [@momo_kibidango](https://twitter.com/momo_kibidango)
+
+### 4. Contribute
+- Report issues on GitHub
+- Share your benchmarks
+- Suggest optimizations
+- Add model support
+
+## Quick Reference Card
+
+```bash
+# Installation
+git clone https://github.com/rdreilly58/momo-kibidango
+cd momo-kibidango && pip install -r requirements.txt
+python setup.py --download-models
+
+# Basic usage
+from momo_kibidango import MomoInference
+momo = MomoInference()
+response = momo.generate("Your prompt", max_tokens=100)
+
+# OpenClaw
+clawhub install momo-kibidango
+
+# Troubleshooting
+python check_system.py      # System compatibility
+python test_inference.py    # Basic functionality
+python benchmark.py         # Performance testing
+
+# Support
+Discord: discord.gg/momo-kibidango
+Email: support@momo-kibidango.dev
+```
+
+## Conclusion
+
+You now have 2x faster LLM inference running locally. No cloud dependencies, no quality compromise, no monthly fees.
+
+The 5 minutes you invested in setup will save you hours every week. Welcome to the future of local AI.
+
+---
+
+**Having issues?** Join our [Discord](https://discord.gg/momo-kibidango) for real-time help. The community is friendly and responsive.
+
+*This is part 4 of our momo-kibidango series. Read the [introduction](./introducing-momo-kibidango), explore the [technical architecture](./how-pyramid-speculative-decoding-works), or dive into [performance analysis](./performance-analysis).*
