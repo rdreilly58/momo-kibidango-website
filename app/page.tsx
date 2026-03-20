@@ -8,14 +8,14 @@ export default function Home() {
       <Header />
       <main className="flex min-h-screen flex-col">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-peach-50 to-white py-20 px-4 sm:px-6 lg:px-8">
+        <section className="bg-gradient-to-br from-peach-50 to-white py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in">
               <span className="gradient-text">3-Model Speculative Decoding</span>
               <br />
               for OpenClaw
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto animate-slide-up">
+            <p className="text-xl sm:text-2xl text-gray-600 mb-6 max-w-3xl mx-auto animate-slide-up">
               2x faster inference on Apple Silicon with zero quality loss
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
@@ -40,9 +40,9 @@ export default function Home() {
         </section>
 
         {/* Problem Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 The Challenge
               </h2>
@@ -51,7 +51,7 @@ export default function Home() {
                 What if you could have both?
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="card text-center">
                 <div className="text-4xl mb-4">⏰</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Slow Inference</h3>
@@ -78,9 +78,9 @@ export default function Home() {
         </section>
 
         {/* Solution Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 The Solution: Pyramid Speculative Decoding
               </h2>
@@ -89,8 +89,8 @@ export default function Home() {
                 achieving 1.97x speedup with zero quality degradation.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-peach-50 to-accent-50 rounded-2xl p-8 mb-12">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="bg-gradient-to-br from-peach-50 to-accent-50 rounded-2xl p-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Tier 1: Haiku 2</h4>
                   <p className="text-gray-600">Ultra-fast draft model (45.6 tok/s)</p>
@@ -105,7 +105,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="card">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4">1.97x Faster</h3>
                 <div className="space-y-3">
@@ -142,9 +142,9 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 Production Ready
               </h2>
@@ -152,7 +152,7 @@ export default function Home() {
                 Version 1.0.0 includes everything you need for real-world deployment.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="card">
                 <div className="text-peach-500 mb-4">
                   <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,9 +224,9 @@ export default function Home() {
         </section>
 
         {/* Real-World Impact Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 Real-World Impact
               </h2>
@@ -287,9 +287,9 @@ export default function Home() {
         </section>
 
         {/* Academic Credibility Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 Backed by Academic Research
               </h2>
@@ -297,7 +297,7 @@ export default function Home() {
                 momo-kibidango is built on Google Research's peer-reviewed breakthrough in speculative decoding
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
                 <div className="mb-4">
                   <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full">
@@ -343,7 +343,7 @@ export default function Home() {
         </section>
 
         {/* Built by ReillyDesignStudio Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-peach-50 to-amber-50 rounded-2xl p-12 border border-peach-200">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -377,7 +377,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-peach-500 to-peach-600 text-white">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-peach-500 to-peach-600 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Start Optimizing Your Inference
