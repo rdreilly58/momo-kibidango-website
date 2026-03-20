@@ -239,27 +239,19 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-gray-900 mb-6">Built for Production</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <svg className="w-3 h-3 text-peach-500 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
+                    <span className="text-peach-500 mr-2 text-xs font-bold">✓</span>
                     <span className="text-gray-700"><strong>Zero Quality Loss:</strong> Mathematically guaranteed identical output to target model</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-3 h-3 text-peach-500 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
+                    <span className="text-peach-500 mr-2 text-xs font-bold">✓</span>
                     <span className="text-gray-700"><strong>Memory Efficient:</strong> Runs on M1/M2/M3/M4 Macs with 11.6GB memory</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-3 h-3 text-peach-500 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
+                    <span className="text-peach-500 mr-2 text-xs font-bold">✓</span>
                     <span className="text-gray-700"><strong>Graceful Fallback:</strong> Automatically handles edge cases and degradation scenarios</span>
                   </li>
                   <li className="flex items-start">
-                    <svg className="w-3 h-3 text-peach-500 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
+                    <span className="text-peach-500 mr-2 text-xs font-bold">✓</span>
                     <span className="text-gray-700"><strong>Enterprise Monitoring:</strong> Prometheus, Grafana, and detailed metrics built-in</span>
                   </li>
                 </ul>
